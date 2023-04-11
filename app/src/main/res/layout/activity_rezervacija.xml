@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#EBF3F3"
+    tools:context=".RezervacijaActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#EBF3F3"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/labelRezervacija"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="30dp"
+                android:gravity="center"
+                android:text="@string/labelRezervisiteUlaznice"
+                android:textAllCaps="false"
+                android:textColor="#AF0000"
+                android:textSize="32sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/labelNaslovRezervacija"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="15dp"
+                android:textColor="#1E1D1D"
+                android:textSize="22sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/labelDatum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="15dp"
+                android:textColor="#1E1D1D"
+                android:textSize="22sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/labelVreme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="30dp"
+                android:textColor="#1E1D1D"
+                android:textSize="22sp"
+                android:textStyle="italic" />
+
+
+            <TextView
+                android:id="@+id/labelIzaberiteSedista"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/labelIzaberiteSedista"
+                android:textColor="#AF0000"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/labelBina"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="25dp"
+                android:background="#949697"
+                android:gravity="center"
+                android:text="@string/labelBina"
+                android:textColor="#FFFFFF"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                tools:ignore="TextContrastCheck" />
+
+            <TableLayout
+                android:id="@+id/tableLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="3dp"
+                android:shrinkColumns="0,1,2,3,4,5" />
+
+            <TextView
+                android:id="@+id/labelZauzeto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/labelZauzeto"
+                android:textColor="@color/seatUnavalable"
+                android:textSize="12sp"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/labelOdabrano"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/labelOdabrano"
+                android:textColor="@color/buttonPressed"
+                android:textSize="12sp"
+                android:textStyle="bold|italic"
+                tools:ignore="TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/labelSlobodno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/labelSlobodno"
+                android:textColor="@color/buttonNotPressed"
+                android:textSize="12sp"
+                android:textStyle="bold|italic"
+                tools:ignore="TextContrastCheck" />
+
+            <Button
+                android:id="@+id/buttonRezervisi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="25dp"
+                android:text="@string/buttonRezervisi" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

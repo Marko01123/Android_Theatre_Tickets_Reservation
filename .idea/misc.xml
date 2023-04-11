@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Marko/AndroidStudioProjects/Vezbe2021/Pozoriste/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.23" />
+        <entry key="..\:/Users/Marko/AndroidStudioProjects/Vezbe2021/Pozoriste/app/src/main/res/drawable/border.xml" value="0.2405" />
+        <entry key="..\:/Users/Marko/AndroidStudioProjects/Vezbe2021/Pozoriste/app/src/main/res/drawable/border_show.xml" value="0.2295" />
+        <entry key="..\:/Users/Marko/AndroidStudioProjects/Vezbe2021/Pozoriste/app/src/main/res/drawable/border_table.xml" value="0.2295" />
+        <entry key="..\:/Users/Marko/AndroidStudioProjects/Vezbe2021/Pozoriste/app/src/main/res/drawable/button_states.xml" value="0.2295" />
+        <entry key="..\:/Users/Marko/AndroidStudioProjects/Vezbe2021/Pozoriste/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2355" />
+        <entry key="..\:/Users/Marko/AndroidStudioProjects/Vezbe2021/Pozoriste/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Marko/AndroidStudioProjects/Vezbe2021/Pozoriste/app/src/main/res/layout/activity_predstave.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Marko/AndroidStudioProjects/Vezbe2021/Pozoriste/app/src/main/res/layout/activity_prijava.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Marko/AndroidStudioProjects/Vezbe2021/Pozoriste/app/src/main/res/layout/activity_prikaz_rezervacija.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Marko/AndroidStudioProjects/Vezbe2021/Pozoriste/app/src/main/res/layout/activity_projekcija.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Marko/AndroidStudioProjects/Vezbe2021/Pozoriste/app/src/main/res/layout/activity_rezervacija.xml" value="0.264" />
+        <entry key="..\:/Users/Marko/AndroidStudioProjects/Vezbe2021/Pozoriste/app/src/main/res/layout/dugme.xml" value="0.2557291666666667" />
+        <entry key="..\:/Users/Marko/AndroidStudioProjects/Vezbe2021/Pozoriste/app/src/main/res/layout/predstava.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Marko/AndroidStudioProjects/Vezbe2021/Pozoriste/app/src/main/res/layout/projekcija.xml" value="0.25416666666666665" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

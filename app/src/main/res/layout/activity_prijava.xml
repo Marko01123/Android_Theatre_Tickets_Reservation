@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EBF3F3"
+    tools:context=".PrijavaActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#EBF3F3"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/labelNaslov"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:gravity="center"
+                android:text="@string/labelNaslov"
+                android:textAllCaps="false"
+                android:textColor="#AF0000"
+                android:textSize="32sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/labelPredstave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/labelPrijava2"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/labelEmail2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/labelEmail"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/inputEmail2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:ems="10"
+                android:hint="@string/inputEmail"
+                android:inputType="textEmailAddress"
+                android:minHeight="48dp"
+                android:textColor="#000000"
+                tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
+
+            <TextView
+                android:id="@+id/labelLozinka3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/labelLozinka"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/inputLozinka3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:ems="10"
+                android:hint="@string/inputLozinka"
+                android:inputType="textPassword"
+                android:minHeight="48dp"
+                android:textColor="#000000"
+                tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
+
+            <Button
+                android:id="@+id/buttonPrijava2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/buttonPrijava" />
+
+            <Button
+                android:id="@+id/buttonPovratak"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/buttonPovratak" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

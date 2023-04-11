@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EBF3F3"
+    tools:context=".MainActivity">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/labelNaslov"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:gravity="center"
+                android:text="@string/labelNaslov"
+                android:textAllCaps="false"
+                android:textColor="#AF0000"
+                android:textSize="32sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/labelPredstave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/labelPrijava"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:textStyle="italic" />
+
+            <Button
+                android:id="@+id/buttonPrijava2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/buttonPrijava" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp" />
+
+            <TextView
+                android:id="@+id/labelRegistracija"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/labelRegistracija"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/labelIme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/labelIme"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/inputIme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:ems="10"
+                android:hint="@string/inputIme"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:textColor="#000000"
+                tools:ignore="TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/labelPrezime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/labelPrezime"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/inputPrezime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:ems="10"
+                android:hint="@string/inputPrezime"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:textColor="#000000"
+                tools:ignore="TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/labelEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/labelEmail"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/inputEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:ems="10"
+                android:hint="@string/inputEmail"
+                android:inputType="textEmailAddress"
+                android:minHeight="48dp"
+                android:textColor="#000000"
+                tools:ignore="TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/labelLozinka"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/labelLozinka"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/inputLozinka"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:ems="10"
+                android:hint="@string/inputLozinka"
+                android:inputType="textPassword"
+                android:minHeight="48dp"
+                android:textColor="#000000"
+                tools:ignore="TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/labelLozinka2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/labelLozinka2"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/inputLozinka2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:ems="10"
+                android:hint="@string/inputLozinka"
+                android:inputType="textPassword"
+                android:minHeight="48dp"
+                android:textColor="#000000"
+                tools:ignore="TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/labelRodjendan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/labelRodjendan"
+                android:textColor="#000000" />
+
+            <DatePicker
+                android:id="@+id/inputRodjendan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner" />
+
+            <CheckBox
+                android:id="@+id/checkBoxUslovi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/checkBoxUslovi" />
+
+            <Button
+                android:id="@+id/buttonRegistracija"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="32dp"
+                android:text="@string/buttonRegistracija" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

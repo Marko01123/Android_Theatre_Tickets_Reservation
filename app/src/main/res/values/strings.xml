@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Pozoriste</string>
+    <string name="labelNaslov">Narodno pozoriste</string>
+    <string name="labelPrijava">Vec imate nalog? Prijavite se:</string>
+    <string name="labelRegistracija">Nemate nalog? Registrujte se:</string>
+    <string name="inputEmail">Unesite Vas email</string>
+    <string name="inputLozinka">Unesite Vasu lozinku</string>
+    <string name="inputIme">Unesite Vase ime</string>
+    <string name="inputPrezime">Unesite Vase prezime</string>
+    <string name="labelIme">Ime:</string>
+    <string name="labelPrezime">Prezime:</string>
+    <string name="labelEmail">Email:</string>
+    <string name="labelLozinka">Lozinka:</string>
+    <string name="labelLozinka2">Ponovite lozinku:</string>
+    <string name="buttonPrijava">Prijavite se</string>
+    <string name="checkBoxUslovi">Klikom na ovo polje, izjavljujem da sam procitao/la i prihvatam uslove koriscenja aplikacije</string>
+    <string name="buttonRegistracija">Registruj se</string>
+    <string name="labelRodjendan">Vas datum rodjenja:</string>
+    <string name="labelPrijava2">Prijavite se:</string>
+    <string name="buttonPovratak">Nazad</string>
+    <string name="buttonRezervacije">Rezervisane ulaznice</string>
+    <string name="buttonOdjaviSe">Odjavi se</string>
+    <string name="labelSpisak">Ovde mozete videti spisak predstava:</string>
+    <string name="labelOpis">Opis:</string>
+    <string name="labelRezervisiteUlaznice">Rezervisite ulaznice</string>
+    <string name="labelBina">B I N A</string>
+    <string name="buttonRezervisi">Rezervisi</string>
+    <string name="labelIzaberiteSedista">Izaberite sedista:</string>
+    <string name="labelZauzeto">Zauzeta sedista</string>
+    <string name="labelOdabrano">Odabrana sedista</string>
+    <string name="labelSlobodno">Slobodna sedista</string>
+    <string name="labelRezervisaneUlazniceNaslov">Ovde mozete videti Vase rezervisane ulaznice:</string>
+</resources>
