@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#EBF3F3"
+    android:background="#FFFFFF"
     tools:context=".RezervacijaActivity">
 
     <ScrollView
@@ -14,7 +14,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#EBF3F3"
+            android:background="#FFFFFF"
             android:orientation="vertical">
 
             <TextView

@@ -17,13 +17,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import org.json.JSONArray;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.Base64;
+
+import javax.crypto.SecretKey;
 
 public class PredstaveActivity extends AppCompatActivity implements View.OnClickListener{
     private TextView labelPredstave;
     private Button buttonRezervacije, buttonOdjaviSe;
-    private int user_id;
     private String ime, prezime, email;
+    private SecretKey kljuc;
+    private Database db;
     private final String url = "https://marko01123.github.io/singidunum_test/pozoriste_api.json";
 
     @Override
@@ -39,12 +44,12 @@ public class PredstaveActivity extends AppCompatActivity implements View.OnClick
         buttonRezervacije = findViewById(R.id.buttonRezervacije);
         buttonOdjaviSe = findViewById(R.id.buttonOdjaviSe);
 
+        db = new Database(this);
+
         Bundle extras = getIntent().getExtras();
         ime = extras.getString("ime");
         prezime = extras.getString("prezime");
         email = extras.getString("email");
-        /*String lozinka = extras.getString("lozinka");
-        String rodjendan = extras.getString("rodjendan");*/
 
         String predstaveTekst = ime + " " + prezime+", dobrodosli.";
         labelPredstave.append(predstaveTekst);
@@ -58,30 +63,42 @@ public class PredstaveActivity extends AppCompatActivity implements View.OnClick
         LinearLayout mLinearLayout = (LinearLayout)findViewById(R.id.predstave);
         mLinearLayout.addView(view);
 
-        Database db = new Database(this);
-        user_id = db.returnIdByEmail(email);
-
-        dohvatiPodatke();
+        getDataFromApi();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        kljuc = Ciphers.getAESKey();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        kljuc = null;
+        db.close();
+    }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.buttonRezervacije:
-                prikazRezervacija();
+                seeReservations();
                 break;
             case R.id.buttonOdjaviSe:
-                odjaviSe();
+                signOut();
                 break;
         }
     }
 
-    private void odjaviSe(){
-        startActivity(new Intent(this, MainActivity.class));
+    @Override
+    public void onBackPressed() {}
+
+    private void signOut(){
+        startActivity(new Intent(this, RegistracijaActivity.class));
     }
 
-    private void prikazRezervacija(){
+    private void seeReservations(){
         Intent intent = new Intent(this, PrikazRezervacijaActivity.class);
 
         SharedPreferences sharedPred = getSharedPreferences("emailSHP", 0);
@@ -98,12 +115,12 @@ public class PredstaveActivity extends AppCompatActivity implements View.OnClick
         ProjekcijaActivity gde se vrši ispis svih detalja iz API-ja o toj predstavi. Prosleđujemo i korisnikov ID iz baze koji će
         nam kasnije trebati pri rezervaciji sedišta zbog stranog ključa u tabeli rezervacije.
      */
-    private void dohvatiPodatke(){
+    private void getDataFromApi(){
         Api.getJSON(url, new ReadDataHandler(){
             @Override
             public void handleMessage(@NonNull Message msg) {
                 String odgovor = getJson();
-
+                Ciphers c = new Ciphers();
                 try {
                     JSONArray array = new JSONArray(odgovor);
                     ArrayList<Predstava> predstave = Predstava.parseJSONArray(array);
@@ -137,8 +154,11 @@ public class PredstaveActivity extends AppCompatActivity implements View.OnClick
                                 extras.putString("slika", predstava.getSlika());
                                 extras.putString("opis", predstava.getOpis());
                                 extras.putString("vreme", predstava.getVreme());
-                                extras.putInt("user_id", user_id);
 
+                                ByteBuffer buffer = ByteBuffer.allocate(Integer.BYTES);
+                                buffer.putInt(db.returnIdByEmail(new String(c.decryptAES(Base64.getDecoder().decode(email), kljuc))));
+                                byte[] sifratId = buffer.array();
+                                extras.putString("user_id", Base64.getEncoder().encodeToString(c.encryptAES(sifratId, kljuc)));
                                 intent.putExtras(extras);
                                 startActivity(intent);
                             }

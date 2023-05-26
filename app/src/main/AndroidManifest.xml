@@ -3,6 +3,8 @@
     package="com.example.pozoriste">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_KEYGUARD_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -27,7 +29,7 @@
             android:name=".PrijavaActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".RegistracijaActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

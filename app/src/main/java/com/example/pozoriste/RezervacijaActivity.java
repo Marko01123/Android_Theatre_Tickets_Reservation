@@ -14,9 +14,13 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
+
+import javax.crypto.SecretKey;
+
 /*
     RezervacijaActivity ima zadatak da prikaže detalje svakog izabranog termina odnosno projekcije (datum, vreme) i dinamički stvori
     tabelu 5x6 koja simulira pozorišnu dvoranu. Na klik na polje u tabeli, koje je dugme, odabira se sedište u dvorani, boja dugmeta se
@@ -38,6 +42,7 @@ public class RezervacijaActivity extends AppCompatActivity implements View.OnCli
     private int brojac = 0;
     private List<String> sedista;
     private boolean[] daLiJeIzabranoSediste;
+    private SecretKey kljuc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +58,7 @@ public class RezervacijaActivity extends AppCompatActivity implements View.OnCli
         labelVreme = findViewById(R.id.labelVreme);
         tl = findViewById(R.id.tableLayout);
         sedista = new ArrayList<>();
+        Ciphers c = new Ciphers();
         db = new Database(this);
 
         buttonRezervisi = findViewById(R.id.buttonRezervisi);
@@ -63,7 +69,13 @@ public class RezervacijaActivity extends AppCompatActivity implements View.OnCli
         String datum = extras.getString("datum");
         String vreme = extras.getString("vreme");
         projekcija_id = extras.getInt("projekcija_id");
-        user_id = extras.getInt("user_id");
+
+        kljuc = Ciphers.getAESKey();
+        String sifratID = extras.getString("user_id");
+        byte[] decryptedData = c.decryptAES(Base64.getDecoder().decode(sifratID), kljuc);
+
+        ByteBuffer buffer = ByteBuffer.wrap(decryptedData);
+        user_id = buffer.getInt();
 
         String naslovLabel = "Naslov projekcije: "+naslov;
         String datumLabel = "Datum projekcije: "+datum;
@@ -73,7 +85,7 @@ public class RezervacijaActivity extends AppCompatActivity implements View.OnCli
         labelDatum.append(datumLabel);
         labelVreme.append(vremeLabel);
 
-        ubaciTabelu();
+        makeTable();
         daLiJeIzabranoSediste = new boolean[brojac];
 
         if(db.checkIfTwoTicketsReserved(user_id, projekcija_id)){
@@ -83,8 +95,15 @@ public class RezervacijaActivity extends AppCompatActivity implements View.OnCli
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        kljuc = null;
+        db.close();
+    }
+
+    @Override
     public void onClick(View view) {
-        if(db.checkIfTwoTicketsReserved(user_id,projekcija_id)){
+        if(db.checkIfTwoTicketsReserved(user_id, projekcija_id)){
             for(int i = 0; i<brojac; i++){
                 if (view.getId() == i){
                     view.setEnabled(false);
@@ -127,20 +146,25 @@ public class RezervacijaActivity extends AppCompatActivity implements View.OnCli
                     }
                 }
 
+                Ciphers c = new Ciphers();
                 Intent intent = new Intent(this, PredstaveActivity.class);
                 UsersModel user = db.returnUserById(user_id);
+                user_id = -1;
+                byte[] sifratEmail = c.encryptAES(user.getEmail().getBytes(), kljuc);
+
                 Bundle extras = new Bundle();
                 extras.putString("ime", user.getIme());
                 extras.putString("prezime", user.getPrezime());
-                extras.putString("email", user.getEmail());
+                extras.putString("email", Base64.getEncoder().encodeToString(sifratEmail));
                 intent.putExtras(extras);
                 Toast.makeText(this, "Rezervacija je bila uspesna.", Toast.LENGTH_LONG).show();
                 startActivity(intent);
+
             }
         }
     }
 
-    private void ubaciTabelu(){
+    private void makeTable(){
         for(int i = 1; i <= 5; i++){
             TableRow tr = new TableRow(this);
 

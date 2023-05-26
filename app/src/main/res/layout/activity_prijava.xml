@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EBF3F3"
+    android:background="#FFFFFF"
     tools:context=".PrijavaActivity">
 
     <ScrollView
@@ -14,7 +14,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#EBF3F3"
+            android:background="#FFFFFF"
             android:orientation="vertical">
 
             <TextView
@@ -78,19 +78,40 @@
                 android:text="@string/labelLozinka"
                 android:textColor="#000000" />
 
-            <EditText
-                android:id="@+id/inputLozinka3"
+            <LinearLayout
+                android:id="@+id/layoutLozinka"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="16dp"
-                android:ems="10"
-                android:hint="@string/inputLozinka"
-                android:inputType="textPassword"
-                android:minHeight="48dp"
-                android:textColor="#000000"
-                tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/inputLozinka3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8"
+                    android:ems="10"
+                    android:hint="@string/inputLozinka"
+                    android:inputType="textPassword"
+                    android:minHeight="48dp"
+                    android:textColor="#000000"
+                    android:textColorHighlight="#000000"
+                    tools:ignore="TextContrastCheck" />
+
+                <ImageButton
+                    android:id="@+id/buttonVidiLozinku3"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.15"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:background="@null"
+                    android:src="@drawable/passeye"
+                    android:scaleType="fitCenter"
+                    android:importantForAccessibility="no"/>
+
+            </LinearLayout>
 
             <Button
                 android:id="@+id/buttonPrijava2"

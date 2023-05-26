@@ -10,15 +10,17 @@ public class UsersModel implements BaseColumns {
     public static final String COLUMN_EMAIL = "email";
     public static final String COLUMN_PASSWORD = "lozinka";
     public static final String COLUMN_BIRTH = "rodjendan";
+    public static final String COLUMN_NONCE = "nonce";
 
-    private String ime, prezime, email, lozinka, rodjendan;
+    private String ime, prezime, email, lozinka, rodjendan, nonce;
 
-    public UsersModel(String ime, String prezime, String email, String lozinka, String rodjendan) {
+    public UsersModel(String ime, String prezime, String email, String lozinka, String rodjendan, String nonce) {
         this.ime = ime;
         this.prezime = prezime;
         this.email = email;
         this.lozinka = lozinka;
         this.rodjendan = rodjendan;
+        this.nonce = nonce;
     }
 
     public UsersModel() {
@@ -43,14 +45,19 @@ public class UsersModel implements BaseColumns {
         return rodjendan;
     }
 
+    public String getNonce() {
+        return nonce;
+    }
+
     @Override
     public String toString() {
         return "UsersModel{" +
-                " ime='" + ime + '\'' +
+                "ime='" + ime + '\'' +
                 ", prezime='" + prezime + '\'' +
                 ", email='" + email + '\'' +
                 ", lozinka='" + lozinka + '\'' +
                 ", rodjendan='" + rodjendan + '\'' +
+                ", nonce='" + nonce + '\'' +
                 '}';
     }
 }

@@ -10,8 +10,10 @@ import android.view.Gravity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
+
+import javax.crypto.SecretKey;
 
 /*
     U ovoj aktivnosti, spisak svih zapisa rezervisanih sedišta za svaku projekciju za prijavljenog korisnika se ubacuje u listu putem
@@ -22,6 +24,7 @@ import java.util.List;
 
 public class PrikazRezervacijaActivity extends AppCompatActivity {
     private Database db;
+    private SecretKey kljuc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,14 +33,22 @@ public class PrikazRezervacijaActivity extends AppCompatActivity {
         initComponents();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        db.close();
+        kljuc = null;
+    }
+
     private void initComponents(){
         List<String> lista;
         db = new Database(this);
-
+        kljuc = Ciphers.getAESKey();
+        Ciphers c = new Ciphers();
         SharedPreferences sharedPref = getSharedPreferences("emailSHP", 0);
-        String email = sharedPref.getString("email", "");
+        byte[] sifratEmail = Base64.getDecoder().decode(sharedPref.getString("email", ""));
 
-        lista = db.returnReservationDetails(email);
+        lista = db.returnReservationDetails(new String(c.decryptAES(sifratEmail, kljuc)));
         LinearLayout layout = findViewById(R.id.rezervacije);
 
         if(lista.isEmpty()){

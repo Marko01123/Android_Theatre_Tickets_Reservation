@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
@@ -33,10 +35,9 @@ import javax.net.ssl.HttpsURLConnection;
 public class ProjekcijaActivity extends AppCompatActivity implements View.OnClickListener{
     private TextView labelNaslovPredstave, labelGlumci, labelRezija, labelPisac, labelGodina, labelZanr, labelOpisTekst;
     private ImageView prikazSlike;
-    private ProgressDialog dijalog;
     private Database db;
     private int projekcija_id;
-    private int user_id;
+    private String sifratID;
     private String naslov;
     private List<String> vremeBaza;
     private int brojac = 0;
@@ -47,6 +48,12 @@ public class ProjekcijaActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_projekcija);
 
         initComponents();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        db.close();
     }
 
     private void initComponents(){
@@ -70,7 +77,7 @@ public class ProjekcijaActivity extends AppCompatActivity implements View.OnClic
         String zanr = extras.getString("zanr");
         String opis = extras.getString("opis");
         String vremenaProjekcija = extras.getString("vreme");
-        user_id = extras.getInt("user_id");
+        sifratID = extras.getString("user_id");
         final String URL = extras.getString("slika");
 
         labelNaslovPredstave.append(naslov);
@@ -92,7 +99,7 @@ public class ProjekcijaActivity extends AppCompatActivity implements View.OnClic
 
         labelOpisTekst.append(opis);
 
-        new dodajSliku().execute(URL);
+        Picasso.get().load(URL).into(prikazSlike);
 
         LinearLayout layout = findViewById(R.id.projekcije);
 
@@ -181,41 +188,8 @@ public class ProjekcijaActivity extends AppCompatActivity implements View.OnClic
 
         extras.putString("naslov", naslov);
         extras.putInt("projekcija_id", projekcija_id);
-        extras.putInt("user_id", user_id);
+        extras.putString("user_id", sifratID);
         intent.putExtras(extras);
         startActivity(intent);
-    }
-
-    //Dodavanje slike sa linka koji je isčitan iz API-ja
-    private class dodajSliku extends AsyncTask<String, Void, Bitmap>{
-        @Override
-        protected void onPreExecute() {
-            dijalog = ProgressDialog.show(ProjekcijaActivity.this, "Preuzimanje", "Slika se preuzima...");
-        }
-
-        @Override
-        protected Bitmap doInBackground(String... strings) {
-            try{
-                URL url = new URL(strings[0]);
-
-                HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
-                con.setDoInput(true);
-                con.connect();
-                InputStream input = con.getInputStream();
-                Bitmap slika = BitmapFactory.decodeStream(input);
-                input.close();
-                return slika;
-            } catch (Exception e){
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap slika) {
-            dijalog.dismiss();
-            prikazSlike.setImageBitmap(slika);
-        }
     }
 }
