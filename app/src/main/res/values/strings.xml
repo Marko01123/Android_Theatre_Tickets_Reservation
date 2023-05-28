@@ -29,5 +29,6 @@
     <string name="labelZauzeto">Zauzeta sedista</string>
     <string name="labelOdabrano">Odabrana sedista</string>
     <string name="labelSlobodno">Slobodna sedista</string>
+    <string name="rezervacija">Rezervisi</string>
     <string name="labelRezervisaneUlazniceNaslov">Ovde mozete videti Vase rezervisane ulaznice:</string>
 </resources>

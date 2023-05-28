@@ -21,9 +21,6 @@ public class ProjekcijaModel implements BaseColumns {
         this.predstava_id = predstava_id;
     }
 
-    public ProjekcijaModel() {
-    }
-
     public String getDate() {
         return date;
     }

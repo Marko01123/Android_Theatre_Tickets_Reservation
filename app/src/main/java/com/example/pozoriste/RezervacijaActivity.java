@@ -68,13 +68,17 @@ public class RezervacijaActivity extends AppCompatActivity implements View.OnCli
         String naslov = extras.getString("naslov");
         String datum = extras.getString("datum");
         String vreme = extras.getString("vreme");
-        projekcija_id = extras.getInt("projekcija_id");
 
         kljuc = Ciphers.getAESKey();
-        String sifratID = extras.getString("user_id");
-        byte[] decryptedData = c.decryptAES(Base64.getDecoder().decode(sifratID), kljuc);
 
-        ByteBuffer buffer = ByteBuffer.wrap(decryptedData);
+        String B64SifratProjekcijaId = extras.getString("projekcija_id");
+        byte[] decryptedDataProjectionId = c.decryptAES(Base64.getDecoder().decode(B64SifratProjekcijaId), kljuc);
+        projekcija_id = Integer.parseInt(new String(decryptedDataProjectionId));
+
+        String B64SifratUserId = extras.getString("user_id");
+        byte[] decryptedDataUserId = c.decryptAES(Base64.getDecoder().decode(B64SifratUserId), kljuc);
+
+        ByteBuffer buffer = ByteBuffer.wrap(decryptedDataUserId);
         user_id = buffer.getInt();
 
         String naslovLabel = "Naslov projekcije: "+naslov;
@@ -150,6 +154,7 @@ public class RezervacijaActivity extends AppCompatActivity implements View.OnCli
                 Intent intent = new Intent(this, PredstaveActivity.class);
                 UsersModel user = db.returnUserById(user_id);
                 user_id = -1;
+                projekcija_id = -1;
                 byte[] sifratEmail = c.encryptAES(user.getEmail().getBytes(), kljuc);
 
                 Bundle extras = new Bundle();
