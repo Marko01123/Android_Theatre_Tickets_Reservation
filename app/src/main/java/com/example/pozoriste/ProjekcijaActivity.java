@@ -2,13 +2,9 @@ package com.example.pozoriste;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
+
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -20,16 +16,10 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.InputStream;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.Base64;
-import java.util.List;
 
 import javax.crypto.SecretKey;
-import javax.net.ssl.HttpsURLConnection;
 /*
     Klasa ProjekcijaActivity služi da dovuče sliku sa linka iz API-ja, da ispiše sve ostale podatke o toj jednoj predstavi koja je u
     aktivnosti PredstaveActivity izabrana. Ovde se ta predstava upisuje u bazu kao i projekcija ili projekcije u zavisnosti od toga
@@ -86,7 +76,7 @@ public class ProjekcijaActivity extends AppCompatActivity{
 
         labelNaslovPredstave.append(naslov);
 
-        String rezijaLabel = "Rezija: "+rezija;
+        String rezijaLabel = "Režija: "+rezija;
         labelRezija.append(rezijaLabel);
 
         String glumciLabel = "Glumci: "+glumci;
@@ -95,10 +85,10 @@ public class ProjekcijaActivity extends AppCompatActivity{
         String pisacLabel = "Pisac: "+pisac;
         labelPisac.append(pisacLabel);
 
-        String godinaLabel = "Godina prvog prikazivanja u Narodnom pozoristu: "+godina;
+        String godinaLabel = "Godina prvog prikazivanja u Narodnom pozorištu: "+godina;
         labelGodina.append(godinaLabel);
 
-        String zanrLabel = "Zanr: "+zanr;
+        String zanrLabel = "Žanr: "+zanr;
         labelZanr.append(zanrLabel);
 
         labelOpisTekst.append(opis);

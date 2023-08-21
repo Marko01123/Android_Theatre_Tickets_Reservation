@@ -158,13 +158,18 @@ public class PrijavaActivity extends AppCompatActivity implements View.OnClickLi
     */
     private void logIn(){
         Ciphers cipher = new Ciphers();
-        UsersModel user = db.returnUserByEmail(inputEmail2.getText().toString());
 
         if(inputEmail2.getText().toString().equals("") || inputLozinka3.getText().toString().equals("")){
-            Toast.makeText(this, "Unos email-a ili lozinke ne moze biti prazan.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Unos email-a ili lozinke ne može biti prazan.", Toast.LENGTH_LONG).show();
             return;
         }
 
+        if(!inputEmail2.getText().toString().matches("([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})")){
+            Toast.makeText(this, "Email nije unet u dobrom formatu.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        UsersModel user = db.returnUserByEmail(inputEmail2.getText().toString());
         if(user.getEmail().equals(inputEmail2.getText().toString())){
             char[] hashLozinka = cipher.gen_hash(Base64.getDecoder().decode(user.getNonce()), inputLozinka3.getText().toString()).toCharArray();
             if(user.getLozinka().equals(new String(hashLozinka))) {
@@ -182,7 +187,7 @@ public class PrijavaActivity extends AppCompatActivity implements View.OnClickLi
                 deleteStorage();
                 deleteFields();
             } else {
-                Toast.makeText(this, "Lozinka koju ste uneli nije tacna.", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Lozinka koju ste uneli nije tačna.", Toast.LENGTH_LONG).show();
             }
         } else {
             Toast.makeText(this, "Korisnik ne postoji u bazi. Molimo Vas registrujte se.", Toast.LENGTH_LONG).show();

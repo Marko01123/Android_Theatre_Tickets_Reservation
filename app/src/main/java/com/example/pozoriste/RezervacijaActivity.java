@@ -36,7 +36,6 @@ public class RezervacijaActivity extends AppCompatActivity implements View.OnCli
     private TextView labelNaslovRezervacija, labelDatum, labelVreme;
     private Button buttonRezervisi;
     private TableLayout tl;
-    private boolean click = true;
     private int user_id, projekcija_id;
     private Database db;
     private int brojac = 0;
@@ -60,7 +59,6 @@ public class RezervacijaActivity extends AppCompatActivity implements View.OnCli
         sedista = new ArrayList<>();
         Ciphers c = new Ciphers();
         db = new Database(this);
-
         buttonRezervisi = findViewById(R.id.buttonRezervisi);
         buttonRezervisi.setOnClickListener(this);
 
@@ -93,7 +91,7 @@ public class RezervacijaActivity extends AppCompatActivity implements View.OnCli
         daLiJeIzabranoSediste = new boolean[brojac];
 
         if(db.checkIfTwoTicketsReserved(user_id, projekcija_id)){
-            Toast.makeText(this, "Ne mozete rezervisati vise od dve karte", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Ne možete rezervisati više od dve karte", Toast.LENGTH_LONG).show();
             buttonRezervisi.setEnabled(false);
         }
     }
@@ -116,19 +114,16 @@ public class RezervacijaActivity extends AppCompatActivity implements View.OnCli
         } else {
             for (int i = 0; i < brojac; i++) {
                 if (view.getId() == i) {
-                    if (click) {
+                    if (daLiJeIzabranoSediste[i]) {
                         view.setBackgroundColor(getResources().getColor(R.color.buttonNotPressed));
-                        click = false;
                         daLiJeIzabranoSediste[i] = false;
                     } else {
                         view.setBackgroundColor(getResources().getColor(R.color.buttonPressed));
-                        click = true;
                         daLiJeIzabranoSediste[i] = true;
                     }
                 }
             }
         }
-
         if (view.getId() == R.id.buttonRezervisi) {
             int izabranaSedista = 0;
             for(int i = 0; i<brojac; i++){
@@ -138,9 +133,11 @@ public class RezervacijaActivity extends AppCompatActivity implements View.OnCli
             }
 
             if(izabranaSedista > 2){
-                Toast.makeText(this, "Ne moze se rezervisati vise od dva sedista", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Ne može se rezervisati više od dva sedišta.", Toast.LENGTH_LONG).show();
             } else if(db.checkFirstTicketReservedOnlyOneAfterCan(user_id, projekcija_id) && izabranaSedista >= 2) {
-                Toast.makeText(this, "Ne moze se rezervisati vise od dva sedista", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Ne može se rezervisati više od dva sedišta.", Toast.LENGTH_LONG).show();
+            } else if(izabranaSedista == 0){
+                Toast.makeText(this, "Niste označili nijedno sedište.", Toast.LENGTH_LONG).show();
             } else {
                 for (int i = 0; i < brojac; i++) {
                     if(daLiJeIzabranoSediste[i]){
@@ -162,7 +159,7 @@ public class RezervacijaActivity extends AppCompatActivity implements View.OnCli
                 extras.putString("prezime", user.getPrezime());
                 extras.putString("email", Base64.getEncoder().encodeToString(sifratEmail));
                 intent.putExtras(extras);
-                Toast.makeText(this, "Rezervacija je bila uspesna.", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Rezervacija je bila uspešna.", Toast.LENGTH_LONG).show();
                 startActivity(intent);
 
             }

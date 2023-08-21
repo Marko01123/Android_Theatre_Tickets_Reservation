@@ -137,7 +137,7 @@ public class RegistracijaActivity extends AppCompatActivity implements View.OnCl
             public void afterTextChanged(Editable editable) {
                 if (!editable.toString().equals("") &&
                         !editable.toString().matches("(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+])[A-Za-z\\d!@#$%^&*()_+]{8,}")) {
-                    textInputLayoutLozinka.setError("Lozinka mora biti duza od 8 karaktera, mora da sadrzi makar jedno veliko slovo, broj i specijalni karakter.");
+                    textInputLayoutLozinka.setError("Lozinka mora biti duža od 8 karaktera, mora da sadrži makar jedno veliko slovo, broj i specijalni karakter.");
                 } else {
                     textInputLayoutLozinka.setError(null);
                 }
@@ -155,7 +155,7 @@ public class RegistracijaActivity extends AppCompatActivity implements View.OnCl
             public void afterTextChanged(Editable editable) {
                 if(!editable.toString().equals("") &&
                         !editable.toString().matches("(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+])[A-Za-z\\d!@#$%^&*()_+]{8,}")){
-                    textInputLayoutLozinka2.setError("Lozinka mora biti duza od 8 karaktera, mora da sadrzi makar jedno veliko slovo, broj i specijalni karakter.");
+                    textInputLayoutLozinka2.setError("Lozinka mora biti duža od 8 karaktera, mora da sadrži makar jedno veliko slovo, broj i specijalni karakter.");
                 } else {
                     textInputLayoutLozinka2.setError(null);
                 }
@@ -297,7 +297,7 @@ public class RegistracijaActivity extends AppCompatActivity implements View.OnCl
     //izlaz iz aplikacije na dijalog
     private void showExitDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Da li ste sigurni da zelite da izadjete iz aplikacije?")
+        builder.setMessage("Da li ste sigurni da želite da izađete iz aplikacije?")
                 .setPositiveButton("Da", (dialogInterface, i) -> {
                     izlazClicked = true;
                     db.close();
@@ -345,13 +345,23 @@ public class RegistracijaActivity extends AppCompatActivity implements View.OnCl
             return;
         }
 
+        if(!inputIme.getText().toString().matches("([A-Z][a-z]+)")){
+            Toast.makeText(this, "Ime nije u dobrom formatu.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if(!inputPrezime.getText().toString().matches("([A-Z][a-z]+(-[A-Z][a-z]+)?)")){
+            Toast.makeText(this, "Prezime nije u dobrom formatu.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         if(!inputEmail.getText().toString().matches("([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})")){
             Toast.makeText(this, "Email nije unet u dobrom formatu.", Toast.LENGTH_LONG).show();
             return;
         }
 
         if(!inputLozinka.getText().toString().matches("(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+])[A-Za-z\\d!@#$%^&*()_+]{8,}")){
-            Toast.makeText(this, "Lozinka mora da sadrzi makar jedno veliko slovo, broj i specijalni karakter.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Lozinka mora da sadrži makar jedno veliko slovo, broj i specijalni karakter.", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -361,22 +371,23 @@ public class RegistracijaActivity extends AppCompatActivity implements View.OnCl
         }
 
         if(itemClicked((checkBoxUslovi)) == 0){
-            Toast.makeText(this, "Molimo Vas, slozite se sa uslovima koriscenja aplikacije.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Molimo Vas, složite se sa uslovima korišćenja aplikacije.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if(db.returnEmail(inputEmail.getText().toString())){
+            Toast.makeText(this, "Korisnik već postoji u bazi. Prijavite se.", Toast.LENGTH_LONG).show();
             return;
         }
 
         Ciphers cipher = new Ciphers();
         byte[] nonce = cipher.gen_nonce();
-        char[] hashPass = cipher.gen_hash(nonce, inputLozinka.getText().toString()).toCharArray();
-
-        if(db.returnEmail(inputEmail.getText().toString())){
-            Toast.makeText(this, "Korisnik vec postoji u bazi. Prijavite se.", Toast.LENGTH_LONG).show();
-            return;
-        }
 
         while(db.returnNonce(Base64.getEncoder().encodeToString(nonce))){
             nonce = cipher.gen_nonce();
         }
+
+        char[] hashPass = cipher.gen_hash(nonce, inputLozinka.getText().toString()).toCharArray();
 
         db.addUser((inputIme.getText().toString()), (inputPrezime.getText().toString()),
                 (inputEmail.getText().toString()), new String(hashPass), dateToString(), Base64.getEncoder().encodeToString(nonce));

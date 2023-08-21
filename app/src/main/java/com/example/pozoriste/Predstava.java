@@ -139,7 +139,6 @@ public class Predstava{
         } catch (Exception e){
             e.printStackTrace();
         }
-
         return predstava;
     }
     //parsira niz JSON objekata

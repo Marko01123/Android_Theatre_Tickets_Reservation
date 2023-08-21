@@ -17,7 +17,6 @@ import java.util.List;
 */
 public class Database extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "pozoriste_database"; //ime fajla baze
-
     private static final String CREATE_USER_TABLE = "CREATE TABLE IF NOT EXISTS " + UsersModel.TABLE_NAME + " (" +
             UsersModel._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             UsersModel.COLUMN_NAME + " TEXT," +
@@ -79,7 +78,6 @@ public class Database extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(DELETE_RESERVATION_TABLE);
         onCreate(sqLiteDatabase);
     }
-
 
     public void addUser(String ime, String prezime, String email, String lozinka, String rodjendan, String nonce){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -391,7 +389,7 @@ public class Database extends SQLiteOpenHelper {
             rezervacija = "Naslov: "+naslov+"\n" +
                     "Datum: "+datum+"\n" +
                     "Vreme: "+vreme+"\n" +
-                    "Rezervisana sedista: "+sedista;
+                    "Rezervisana sedišta: "+sedista;
 
             lista.add(rezervacija);
         }
@@ -400,4 +398,15 @@ public class Database extends SQLiteOpenHelper {
 
         return lista;
     }
+
+    public void deleteReservations(int userId, int projekcijaId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String whereClause = RezervacijaModel.USER_ID + " = ? AND " + RezervacijaModel.PROJEKCIJA_ID + " = ?";
+        String[] whereArgs = { String.valueOf(userId), String.valueOf(projekcijaId) };
+
+        db.delete(RezervacijaModel.TABLE_NAME, whereClause, whereArgs);
+    }
+
+
 }

@@ -19,6 +19,7 @@ import org.json.JSONArray;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
 
 import javax.crypto.SecretKey;
@@ -51,7 +52,7 @@ public class PredstaveActivity extends AppCompatActivity implements View.OnClick
         prezime = extras.getString("prezime");
         email = extras.getString("email");
 
-        String predstaveTekst = ime + " " + prezime+", dobrodosli.";
+        String predstaveTekst = ime + " " + prezime+", dobrodošli.";
         labelPredstave.append(predstaveTekst);
 
         buttonRezervacije.setOnClickListener(this);
@@ -157,9 +158,10 @@ public class PredstaveActivity extends AppCompatActivity implements View.OnClick
 
                                 ByteBuffer buffer = ByteBuffer.allocate(Integer.BYTES);
                                 buffer.putInt(db.returnIdByEmail(new String(c.decryptAES(Base64.getDecoder().decode(email), kljuc))));
-                                byte[] sifratId = buffer.array();
-                                extras.putString("user_id", Base64.getEncoder().encodeToString(c.encryptAES(sifratId, kljuc)));
+                                byte[] id = buffer.array();
+                                extras.putString("user_id", Base64.getEncoder().encodeToString(c.encryptAES(id, kljuc)));
                                 intent.putExtras(extras);
+                                Arrays.fill(id, (byte) 0);
                                 startActivity(intent);
                             }
                         });
