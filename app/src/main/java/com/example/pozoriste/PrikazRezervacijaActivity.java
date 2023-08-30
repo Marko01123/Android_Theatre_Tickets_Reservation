@@ -34,27 +34,12 @@ public class PrikazRezervacijaActivity extends AppCompatActivity {
     private SecretKey kljuc;
     private int user_id = -1;
     private int projekcija_id = -1;
-    private boolean isInitComponentsCalled = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prikaz_rezervacija);
-    }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        user_id = -1;
-        projekcija_id = -1;
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (!isInitComponentsCalled) {
-            initComponents();
-            isInitComponentsCalled = true;
-        }
+        initComponents();
     }
 
     @Override
@@ -62,6 +47,8 @@ public class PrikazRezervacijaActivity extends AppCompatActivity {
         super.onDestroy();
         db.close();
         kljuc = null;
+        projekcija_id = -1;
+        user_id = -1;
     }
 
     private void initComponents(){
