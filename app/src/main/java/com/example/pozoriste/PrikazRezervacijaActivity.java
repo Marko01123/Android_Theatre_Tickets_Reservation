@@ -33,7 +33,6 @@ public class PrikazRezervacijaActivity extends AppCompatActivity {
     private Database db;
     private SecretKey kljuc;
     private int user_id = -1;
-    private int projekcija_id = -1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +46,6 @@ public class PrikazRezervacijaActivity extends AppCompatActivity {
         super.onDestroy();
         db.close();
         kljuc = null;
-        projekcija_id = -1;
         user_id = -1;
     }
 
@@ -108,7 +106,7 @@ public class PrikazRezervacijaActivity extends AppCompatActivity {
                 if (vremeMatcher.find()) {
                     vreme = vremeMatcher.group(1);
                 }
-                projekcija_id = db.returnIdByDateAndTime(datum, vreme);
+                int projekcija_id = db.returnIdByDateAndTime(datum, vreme);
 
                 ImageButton brisanje = new ImageButton(this);
                 brisanje.setImageResource(R.drawable.trash);
@@ -127,7 +125,6 @@ public class PrikazRezervacijaActivity extends AppCompatActivity {
                                 .setPositiveButton("Da", (dialogInterface, i) -> {
                                     db.deleteReservations(user_id, projekcija_id);
                                     user_id = -1;
-                                    projekcija_id = -1;
                                     recreate();
                                 })
                                 .setNegativeButton("Ne", (dialogInterface, i) -> dialogInterface.dismiss());
